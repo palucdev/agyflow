@@ -21,9 +21,9 @@ When you notice recurring patterns, fixes, or conventions during implementation 
 - The same type of fix is needed across multiple files
 - A new library/pattern is adopted that should be documented
 
-When this happens, briefly suggest the standard to the user. If approved, invoke `/standards-update` with the identified pattern.
+When this happens, briefly suggest the standard to the user. If approved, invoke `/agyflow:standards-update` with the identified pattern.
 
 ## agyflow Workflows
 
-This project uses the agyflow plugin for structured development workflows. When any `/*` command is invoked, execute it via the Skill tool immediately — do not skip workflows for "straightforward" tasks. The user chose the workflow intentionally; complexity assessment is the workflow's job.
+This project uses the agyflow plugin for structured development workflows. When any `/agyflow:*` skill is invoked, execute it via the Skill tool immediately — do not skip workflows for "straightforward" tasks. The user chose the workflow intentionally; complexity assessment is the workflow's job.
 ```

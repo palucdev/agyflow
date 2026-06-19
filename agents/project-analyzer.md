@@ -287,7 +287,7 @@ Return your analysis in the conversation response (do NOT create files):
 1. **Structured JSON block**: Machine-readable analysis for downstream phases
 2. **Markdown summary**: Human-readable overview for user review
 
-**IMPORTANT**: Do NOT write any files to disk. The flow-init command will use your returned analysis to generate proper documentation in `.agyflow/docs/`.
+**IMPORTANT**: Do NOT write any files to disk. The flow-init skill will use your returned analysis to generate proper documentation in `.agyflow/docs/`.
 
 ---
 
@@ -399,6 +399,6 @@ Before returning your analysis, verify:
 5. Identify conventions (naming, organization, documentation)
 6. Generate structured report (JSON + markdown)
 
-**Output**: Return structured analysis (JSON + markdown) in your response. Do NOT create files - the calling command handles file creation in `.agyflow/docs/`.
+**Output**: Return structured analysis (JSON + markdown) in your response. Do NOT create files - the calling skill handles file creation in `.agyflow/docs/`.
 
 **Remember**: You are an analyzer, not a modifier. Read, analyze, return results in conversation. All findings must be evidence-based.

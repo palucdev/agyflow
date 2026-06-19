@@ -43,8 +43,8 @@ The Task prompt MUST include:
 
 | Input           | Source                  | Purpose                                                                                              |
 | --------------- | ----------------------- | ---------------------------------------------------------------------------------------------------- |
-| `analysis_path` | Orchestrator or command | Path to analyze (task directory, feature directory, or project)                                      |
-| `target`        | Orchestrator or command | `production` (default, full rigor) or `staging` (relaxed)                                            |
+| `analysis_path` | Orchestrator or skill   | Path to analyze (task directory, feature directory, or project)                                      |
+| `target`        | Orchestrator or skill   | `production` (default, full rigor) or `staging` (relaxed)                                            |
 | `report_path`   | Orchestrator (optional) | Where to write report (default: `verification/production-readiness-report.md` relative to task_path) |
 
 **CRITICAL**: All outputs MUST be written under `task_path`. Never write reports to project-level directories (`docs/`, `src/`, project root).
@@ -268,7 +268,7 @@ issue_counts:
 
 ## Integration
 
-**Invoked by**: implementation-verifier (Phase 3), performance orchestrator (Phase 4), standalone via `/reviews-production-readiness` command
+**Invoked by**: implementation-verifier (Phase 3), performance orchestrator (Phase 4), standalone via `/agyflow:reviews-production-readiness` skill
 
 **Prerequisites**:
 

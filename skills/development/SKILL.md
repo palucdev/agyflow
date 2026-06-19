@@ -619,7 +619,7 @@ When starting development from a completed research task, the orchestrator loads
 **Method 1: Research folder as sole argument** (recommended)
 
 ```
-/development .agyflow/tasks/research/2026-01-12-oauth-research
+/agyflow:development .agyflow/tasks/research/2026-01-12-oauth-research
 ```
 
 The orchestrator auto-detects this is a research folder and:
@@ -631,7 +631,7 @@ The orchestrator auto-detects this is a research folder and:
 **Method 2: Explicit --research flag**
 
 ```
-/development "Implement OAuth" --research=.agyflow/tasks/research/2026-01-12-oauth-research
+/agyflow:development "Implement OAuth" --research=.agyflow/tasks/research/2026-01-12-oauth-research
 ```
 
 ### Research Artifacts (Standard List)
@@ -659,12 +659,12 @@ When research context is detected, read these files from the research folder:
 
 ---
 
-## Command Integration
+## Skill Integration
 
 Invoked via:
 
-- `/development [description] [--e2e] [--user-docs] [--research=PATH]` (new)
-- `/development [task-path] [--from=PHASE] [--reset-attempts]` (resume)
+- `/agyflow:development [description] [--e2e] [--user-docs] [--research=PATH]` (new)
+- `/agyflow:development [task-path] [--from=PHASE] [--reset-attempts]` (resume)
 
 ---
 

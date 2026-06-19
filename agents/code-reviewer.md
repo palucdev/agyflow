@@ -1,6 +1,6 @@
 ---
 name: code-reviewer
-description: Automated code quality, security, and performance analysis. Analyzes code for complexity, duplication, security vulnerabilities, performance issues, and best practices compliance. Can run standalone (via command) or as part of implementation verification. Provides actionable findings categorized by severity. Read-only - reports issues without fixing. Does not interact with users.
+description: Automated code quality, security, and performance analysis. Analyzes code for complexity, duplication, security vulnerabilities, performance issues, and best practices compliance. Can run standalone (via skill) or as part of implementation verification. Provides actionable findings categorized by severity. Read-only - reports issues without fixing. Does not interact with users.
 model: inherit
 color: orange
 mode: subagent
@@ -43,8 +43,8 @@ The Task prompt MUST include:
 
 | Input           | Source                  | Purpose                                                                                     |
 | --------------- | ----------------------- | ------------------------------------------------------------------------------------------- |
-| `analysis_path` | Orchestrator or command | Path to analyze (file, directory, or task path)                                             |
-| `scope`         | Orchestrator or command | `all` (default), `quality`, `security`, or `performance`                                    |
+| `analysis_path` | Orchestrator or skill   | Path to analyze (file, directory, or task path)                                             |
+| `scope`         | Orchestrator or skill   | `all` (default), `quality`, `security`, or `performance`                                    |
 | `report_path`   | Orchestrator (optional) | Where to write report (default: `verification/code-review-report.md` relative to task_path) |
 
 **CRITICAL**: All outputs MUST be written under `task_path`. Never write reports to project-level directories (`docs/`, `src/`, project root).
@@ -228,7 +228,7 @@ issue_counts:
 
 ## Integration
 
-**Invoked by**: implementation-verifier (Phase 3), standalone via `/reviews-code` command
+**Invoked by**: implementation-verifier (Phase 3), standalone via `/agyflow:reviews-code` skill
 
 **Prerequisites**:
 

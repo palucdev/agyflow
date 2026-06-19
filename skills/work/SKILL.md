@@ -1,9 +1,9 @@
 ---
 name: work
-description: Unified entry point — auto-classifies tasks and routes to appropriate workflow. ALWAYS execute when invoked via slash command.
+description: Unified entry point — auto-classifies tasks and routes to appropriate workflow. ALWAYS execute when invoked via slash skill.
 ---
 
-**NOTE**: This is a multi-step workflow that invokes the task-classifier subagent and orchestrator skills at specific steps. The `<command-name>` tag refers to THIS command only — you MUST still use the Skill tool to invoke those other skills when instructed below. Follow ALL steps in order.
+**NOTE**: This is a multi-step workflow that invokes the task-classifier subagent and orchestrator skills at specific steps. The `<skill-name>` tag refers to THIS skill only — you MUST still use the Skill tool to invoke those other skills when instructed below. Follow ALL steps in order.
 
 # Unified Work Entry Point
 
@@ -12,7 +12,7 @@ Auto-classifies tasks and routes to the appropriate workflow orchestrator. Suppo
 ## Usage
 
 ```bash
-/work [task description | task folder path | issue identifier]
+/agyflow:work [task description | task folder path | issue identifier]
 ```
 
 ### Input Types
@@ -31,18 +31,18 @@ Auto-classifies tasks and routes to the appropriate workflow orchestrator. Suppo
 
 ```bash
 # Resume existing task
-/work ".agyflow/tasks/development/2025-10-23-login-timeout"
-/work "2025-10-26-user-auth"
+/agyflow:work ".agyflow/tasks/development/2025-10-23-login-timeout"
+/agyflow:work "2025-10-26-user-auth"
 
 # New task (auto-classifies)
-/work "Fix login timeout error on mobile devices"
-/work "Add user authentication with email/password"
-/work "Improve dashboard loading performance"
+/agyflow:work "Fix login timeout error on mobile devices"
+/agyflow:work "Add user authentication with email/password"
+/agyflow:work "Improve dashboard loading performance"
 
 # From issue tracker
-/work "#456"
-/work "PROJ-123"
-/work "AB#789"
+/agyflow:work "#456"
+/agyflow:work "PROJ-123"
+/agyflow:work "AB#789"
 ```
 
 ## How It Works
@@ -227,9 +227,9 @@ Then route to selected workflow using Skill tool.
 ```
 Display:
 "Task cancelled. You can:
-- Run /work again when ready
-- Use specific workflow commands directly:
-  /development, /performance, etc."
+- Run /agyflow:work again when ready
+- Use specific workflow skills directly:
+  /agyflow:development, /agyflow:performance, etc."
 ```
 
 ---
@@ -250,7 +250,7 @@ Display:
 
 ### With Task Classifier
 
-The `/work` command delegates classification to the task-classifier subagent via Task tool, which:
+The `/agyflow:work` skill delegates classification to the task-classifier subagent via Task tool, which:
 
 - Fetches issue details from GitHub/Jira/Azure DevOps (via MCP, CLI tools, or WebFetch)
 - Analyzes codebase context for better classification
@@ -259,7 +259,7 @@ The `/work` command delegates classification to the task-classifier subagent via
 
 ### With Orchestrators
 
-After classification/detection, this command routes to the appropriate orchestrator via Skill tool:
+After classification/detection, this skill routes to the appropriate orchestrator via Skill tool:
 
 - Each orchestrator handles its specific workflow (spec, plan, implement, verify, etc.)
 - State is persisted in `orchestrator-state.yml` for pause/resume
@@ -276,7 +276,7 @@ Uses project documentation for context:
 
 ## Key Behaviors
 
-1. **Single entry point** - One command for all workflow types
+1. **Single entry point** - One skill for all workflow types
 2. **Auto-classification** - Intelligent routing based on task description
 3. **Resume support** - Detects and resumes existing tasks
 4. **Issue integration** - Fetches details from GitHub/Jira/Azure DevOps

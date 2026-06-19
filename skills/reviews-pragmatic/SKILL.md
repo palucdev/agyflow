@@ -60,19 +60,19 @@ The code-quality-pragmatist agent will:
 **Example 1**: Review specific feature
 
 ```
-User: /reviews-pragmatic .agyflow/tasks/development/2025-11-17-user-management/
+User: /agyflow:reviews-pragmatic .agyflow/tasks/development/2025-11-17-user-management/
 ```
 
 **Example 2**: Review source directory
 
 ```
-User: /reviews-pragmatic src/features/payments/
+User: /agyflow:reviews-pragmatic src/features/payments/
 ```
 
 **Example 3**: Review specific file
 
 ```
-User: /reviews-pragmatic src/services/cache-service.ts
+User: /agyflow:reviews-pragmatic src/services/cache-service.ts
 ```
 
 ## What to Expect

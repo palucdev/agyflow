@@ -57,7 +57,7 @@ Starting Phase 0: Initialize & Gather Context...
 
 Use for **product and feature design**: defining what to build before building it. Greenfield products, new features, enhancements, API designs, workflow designs.
 
-**DO NOT use for**: Implementation tasks (use `/development`), pure research (use `/research`), bug fixes, performance optimization, migrations.
+**DO NOT use for**: Implementation tasks (use `/agyflow:development`), pure research (use `/agyflow:research`), bug fixes, performance optimization, migrations.
 
 **When to use this vs development orchestrator**: If you need to explore the problem space, evaluate alternatives, and define requirements interactively before any code is written, use this. If you already know what to build and need to plan and execute, use development.
 
@@ -701,7 +701,7 @@ question — with options:
 Product brief approved and saved to: [task-path]/outputs/product-brief.md
 
 To start development based on this design, clear context first or start a new session, then run:
-/development [task-path]
+/agyflow:development [task-path]
 ```
 
 **Output**: `outputs/product-brief.md`
@@ -759,12 +759,12 @@ Refer to the template [src/templates/orchestrator-state-product-design.yml](../.
 
 ---
 
-## Command Integration
+## Skill Integration
 
 Invoked via:
 
-- `/product-design [description] [--no-visual] [--research=PATH]` (new)
-- `/product-design [task-path] [--from=PHASE]` (resume)
+- `/agyflow:product-design [description] [--no-visual] [--research=PATH]` (new)
+- `/agyflow:product-design [task-path] [--from=PHASE]` (resume)
 
 **Flags**:
 | Flag | Effect |
@@ -786,7 +786,7 @@ Task directory: `.agyflow/tasks/product-design/YYYY-MM-DD-task-name/`
 The product brief is consumed by the development orchestrator:
 
 ```
-/development .agyflow/tasks/product-design/YYYY-MM-DD-task-name/
+/agyflow:development .agyflow/tasks/product-design/YYYY-MM-DD-task-name/
 ```
 
 The development orchestrator auto-detects the product-design task type and copies the product brief to `analysis/design-context/product-brief.md`, then flows design context through all development phases. The product brief's Layer 0 maps to requirements, design characteristics map to task characteristics, and mockup references feed into UI implementation phases.
@@ -796,7 +796,7 @@ The development orchestrator auto-detects the product-design task type and copie
 A completed research workflow can feed into product design:
 
 ```
-/product-design "Design feature X" --research=.agyflow/tasks/research/YYYY-MM-DD-research/
+/agyflow:product-design "Design feature X" --research=.agyflow/tasks/research/YYYY-MM-DD-research/
 ```
 
 Research findings are imported into `context/research-context/` and synthesized alongside other context sources in Phase 1.

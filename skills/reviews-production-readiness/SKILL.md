@@ -55,19 +55,19 @@ The production-readiness-checker subagent will:
 **Example 1**: Check specific task for production
 
 ```
-User: /reviews-production-readiness .agyflow/tasks/development/2025-10-24-payment-api/
+User: /agyflow:reviews-production-readiness .agyflow/tasks/development/2025-10-24-payment-api/
 ```
 
 **Example 2**: Check feature for staging
 
 ```
-User: /reviews-production-readiness src/features/notifications/ --target=staging
+User: /agyflow:reviews-production-readiness src/features/notifications/ --target=staging
 ```
 
 **Example 3**: Comprehensive project check
 
 ```
-User: /reviews-production-readiness .
+User: /agyflow:reviews-production-readiness .
 ```
 
 ## What to Expect

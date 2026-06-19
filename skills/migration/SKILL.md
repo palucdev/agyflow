@@ -350,11 +350,11 @@ Refer to the template [src/templates/orchestrator-state-migration.yml](../../tem
 
 ---
 
-## Command Integration
+## Skill Integration
 
 Invoked via:
 
-- `/migration [description] [--type=TYPE]` (new)
-- `/migration [task-path] [--from=PHASE]` (resume)
+- `/agyflow:migration [description] [--type=TYPE]` (new)
+- `/agyflow:migration [task-path] [--from=PHASE]` (resume)
 
 Task directory: `.agyflow/tasks/migrations/YYYY-MM-DD-task-name/`

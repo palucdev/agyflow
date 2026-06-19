@@ -67,7 +67,7 @@ Custom scope values are matched against existing `.agyflow/docs/standards/*/` di
 ### Phase 1: Planning & Initialization
 
 1. **Parse options** from command arguments
-2. **Check prerequisites**: Verify `.agyflow/docs/` exists. If not, offer to run `/flow-init` first
+2. **Check prerequisites**: Verify `.agyflow/docs/` exists. If not, offer to run `/agyflow:flow-init` first
 3. **Read existing standards** from `.agyflow/docs/INDEX.md` to identify updates vs creates and avoid duplicates
 4. **Display discovery plan** showing scope, sources, and estimated time
 5. **Get user confirmation** via question before proceeding
@@ -196,7 +196,7 @@ Display final results:
 
 | Situation                | Strategy                                              |
 | ------------------------ | ----------------------------------------------------- |
-| `.agyflow/docs/` missing | Offer `/flow-init`, abort if declined                 |
+| `.agyflow/docs/` missing | Offer `/agyflow:flow-init`, abort if declined                 |
 | gh CLI unavailable       | Skip PR analysis, continue with other sources         |
 | GitHub API rate limit    | Skip PR analysis, note in report                      |
 | Config file parse error  | Skip that file, log warning, continue                 |
@@ -212,7 +212,7 @@ Display final results:
 | ------------------------------------ | ---------------------------------------------------------------- |
 | `docs-manager` skill                 | Creates/updates standard files, regenerates INDEX.md             |
 | `implementation-plan-executor` skill | Discovered standards immediately available via INDEX.md          |
-| `standards-update` command           | Complementary: discover = automated bulk, update = manual single |
+| `standards-update` skill           | Complementary: discover = automated bulk, update = manual single |
 
 ---
 
@@ -220,17 +220,17 @@ Display final results:
 
 ```bash
 # Full discovery (default)
-/standards-discover
+/agyflow:standards-discover
 
 # Quick scan (config files only, ~30-60s)
-/standards-discover --scope=quick
+/agyflow:standards-discover --scope=quick
 
 # Frontend standards only
-/standards-discover --scope=frontend
+/agyflow:standards-discover --scope=frontend
 
 # High confidence, auto-apply
-/standards-discover --confidence=80 --auto-apply
+/agyflow:standards-discover --confidence=80 --auto-apply
 
 # Skip external analysis (offline/no GitHub)
-/standards-discover --skip-external
+/agyflow:standards-discover --skip-external
 ```

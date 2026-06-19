@@ -68,19 +68,19 @@ The reality-assessor agent will:
 **Example 1**: Reality check before deployment
 
 ```
-User: /reviews-reality-check .agyflow/tasks/development/2025-11-17-payment-processing/
+User: /agyflow:reviews-reality-check .agyflow/tasks/development/2025-11-17-payment-processing/
 ```
 
 **Example 2**: Verify claimed completion
 
 ```
-User: /reviews-reality-check .agyflow/tasks/development/2025-11-17-login-timeout/
+User: /agyflow:reviews-reality-check .agyflow/tasks/development/2025-11-17-login-timeout/
 ```
 
 **Example 3**: Production readiness check
 
 ```
-User: /reviews-reality-check .agyflow/tasks/development/2025-11-17-user-dashboard/ --production
+User: /agyflow:reviews-reality-check .agyflow/tasks/development/2025-11-17-user-dashboard/ --production
 ```
 
 ## What to Expect

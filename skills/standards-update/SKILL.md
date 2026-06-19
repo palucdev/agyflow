@@ -12,9 +12,9 @@ Update or create standards in `.agyflow/docs/standards/` based on conversation c
 ## Usage
 
 ```bash
-/standards-update                                    # Detect from conversation
-/standards-update "always use React.memo for lists"  # From description
-/standards-update --from=/path/to/other-project      # Sync from another project
+/agyflow:standards-update                                    # Detect from conversation
+/agyflow:standards-update "always use React.memo for lists"  # From description
+/agyflow:standards-update --from=/path/to/other-project      # Sync from another project
 ```
 
 ---
@@ -27,7 +27,7 @@ When `--from=PATH` is provided, the skill switches to **sync mode** — importin
 
 1. Resolve the path (absolute or relative to cwd)
 2. Check `PATH/.agyflow/docs/standards/` exists. If not, inform the user and stop.
-3. Check `.agyflow/docs/standards/` exists in the current project. If not, offer to run `/flow-init` first.
+3. Check `.agyflow/docs/standards/` exists in the current project. If not, offer to run `/agyflow:flow-init` first.
 
 ### SYNC STEP 2: Analyze Differences
 
@@ -156,4 +156,4 @@ Wait for docs-operator to complete, then immediately proceed to Phase 5.
 
 ## Prerequisites
 
-If `.agyflow/docs/` doesn't exist, offer to run `/flow-init` first.
+If `.agyflow/docs/` doesn't exist, offer to run `/agyflow:flow-init` first.

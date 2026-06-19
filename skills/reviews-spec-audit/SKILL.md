@@ -73,19 +73,19 @@ The spec-auditor agent will:
 **Example 1**: Pre-implementation spec audit
 
 ```
-User: /reviews-spec-audit .agyflow/tasks/development/2025-11-17-user-auth/implementation/spec.md
+User: /agyflow:reviews-spec-audit .agyflow/tasks/development/2025-11-17-user-auth/implementation/spec.md
 ```
 
 **Example 2**: Post-implementation audit
 
 ```
-User: /reviews-spec-audit .agyflow/tasks/development/2025-11-17-user-auth/ --post-implementation
+User: /agyflow:reviews-spec-audit .agyflow/tasks/development/2025-11-17-user-auth/ --post-implementation
 ```
 
 **Example 3**: Audit with clarification focus
 
 ```
-User: /reviews-spec-audit spec.md --focus=ambiguity
+User: /agyflow:reviews-spec-audit spec.md --focus=ambiguity
 ```
 
 ## What to Expect

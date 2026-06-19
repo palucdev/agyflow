@@ -73,7 +73,7 @@ agy plugin uninstall agyflow
 Initialize your project to auto-detect coding standards and generate project documentation. Run this inside an active `agy` session:
 
 ```bash
-/flow-init
+/agyflow:flow-init
 ```
 
 This scans your codebase and creates `.agyflow/` with standards, docs, and task folders. May take a few minutes on larger projects.
@@ -81,7 +81,7 @@ This scans your codebase and creates `.agyflow/` with standards, docs, and task 
 If you have another project already using Agyflow, you can reuse its standards as a starting point:
 
 ```bash
-/flow-init --standards-from=/path/to/other-project
+/agyflow:flow-init --standards-from=/path/to/other-project
 ```
 
 ## First Workflow
@@ -89,13 +89,13 @@ If you have another project already using Agyflow, you can reuse its standards a
 Start a workflow by running this inside an active `agy` session:
 
 ```bash
-/development Add user profile page with avatar upload
+/agyflow:development Add user profile page with avatar upload
 ```
 
 Or just discuss your task with Agent and then run:
 
 ```bash
-/development
+/agyflow:development
 ```
 
 The plugin picks up context from your conversation - no arguments needed.
@@ -110,18 +110,18 @@ The plugin picks up context from your conversation - no arguments needed.
 
 All artifacts are saved in `.agyflow/tasks/` organized by type and date.
 
-### Context-Aware Commands
+### Context-Aware Skills
 
-Every workflow command works without arguments. The plugin reads your current conversation to extract the task description and auto-detect the task type:
+Every workflow skill works without arguments. The plugin reads your current conversation to extract the task description and auto-detect the task type:
 
 ```
 You: "The login page throws a 500 error when the session expires"
-You: /development
+You: /agyflow:development
 → Auto-detects: bug fix, extracts description from conversation
 ```
 
 ```
-You: /standards-update
+You: /agyflow:standards-update
 → Scans conversation for patterns like "we always use..." or "prefer X over Y"
 ```
 
@@ -129,27 +129,27 @@ You can always be explicit when you prefer - arguments and flags simply override
 
 ## Supported Workflows
 
-| Command           | Use When                                    |
+| Skill             | Use When                                    |
 | ----------------- | ------------------------------------------- |
-| `/development`    | Features, bug fixes, enhancements           |
-| `/research`       | Research with synthesis and solution design |
-| `/performance`    | Optimizing speed or resource usage          |
-| `/migration`      | Changing technologies or patterns           |
-| `/product-design` | Product and feature design                  |
+| `/agyflow:development` | Features, bug fixes, enhancements           |
+| `/agyflow:research`    | Research with synthesis and solution design |
+| `/agyflow:performance` | Optimizing speed or resource usage          |
+| `/agyflow:migration`   | Changing technologies or patterns           |
+| `/agyflow:product-design` | Product and feature design               |
 
-Task type (feature/bug/enhancement) is auto-detected from context. Override with `--type=feature|bug|enhancement` if needed. Or use `/work` as a single entry point that routes to the right workflow.
+Task type (feature/bug/enhancement) is auto-detected from context. Override with `--type=feature|bug|enhancement` if needed. Or use `/agyflow:work` as a single entry point that routes to the right workflow.
 
-### Quick Commands
+### Quick Skills
 
 For smaller tasks that don't need a full workflow:
 
-| Command         | Use When                                                    | Artifacts                               |
+| Skill           | Use When                                                    | Artifacts                               |
 | --------------- | ----------------------------------------------------------- | --------------------------------------- |
-| `/quick-plan`   | You want a plan with standards awareness before coding      | `task.yml`, `findings.md`               |
-| `/quick-dev`    | You know what to do - just implement with standards applied | `task.yml`, `summary.md`                |
-| `/quick-bugfix` | Quick TDD-driven bug fix — write failing test, fix, verify  | `task.yml`, `findings.md`, `summary.md` |
+| `/agyflow:quick-plan` | You want a plan with standards awareness before coding      | `task.yml`, `findings.md`               |
+| `/agyflow:quick-dev`  | You know what to do - just implement with standards applied | `task.yml`, `summary.md`                |
+| `/agyflow:quick-bugfix` | Quick TDD-driven bug fix — write failing test, fix, verify  | `task.yml`, `findings.md`, `summary.md` |
 
-All quick commands create lightweight task directories under `.agyflow/tasks/quick-{type}/` with a `task.yml` for traceability.
+All quick skills create lightweight task directories under `.agyflow/tasks/quick-{type}/` with a `task.yml` for traceability.
 
 ## Standards-Aware Development
 
@@ -157,8 +157,8 @@ This is the key differentiator. Agyflow doesn't just run workflows - it learns y
 
 - **`flow-init`** scans config files, source code, and documentation to auto-detect your coding standards
 - **Continuous checking** - standards are consulted before specification, during planning, and while coding (not just at the start)
-- **`/standards-discover`** refreshes standards from your evolving codebase
-- **`/standards-update`** lets you add or refine standards manually, or sync from another project with `--from=PATH`
+- **`/agyflow:standards-discover`** refreshes standards from your evolving codebase
+- **`/agyflow:standards-update`** lets you add or refine standards manually, or sync from another project with `--from=PATH`
 
 Standards live in `.agyflow/docs/standards/` and are indexed in `.agyflow/docs/INDEX.md`.
 
@@ -173,13 +173,13 @@ Standards live in `.agyflow/docs/standards/` and are indexed in `.agyflow/docs/I
 **Chain workflows by passing a task folder.** If you've completed a research or product-design workflow and want to build on those results, pass the task folder directly:
 
 ```bash
-/development .agyflow/tasks/research/2026-01-12-oauth-research
+/agyflow:development .agyflow/tasks/research/2026-01-12-oauth-research
 ```
 
 You can also append additional instructions to narrow scope or guide the workflow:
 
 ```bash
-/development .agyflow/tasks/product-design/2026-03-10-dashboard-redesign Implement only phase 1
+/agyflow:development .agyflow/tasks/product-design/2026-03-10-dashboard-redesign Implement only phase 1
 ```
 
 ## Known Issues
@@ -187,10 +187,10 @@ You can also append additional instructions to narrow scope or guide the workflo
 **Orchestrator may stall after long phases.** After context compaction (which typically happens after lengthy phases like implementation), the main agent may stop progressing automatically. If you notice it's idle, just type something like "continue" or "proceed" — it will pick up where it left off. You can also re-invoke the workflow in resume mode to reload the orchestrator state:
 
 ```bash
-/development .agyflow/tasks/development/2026-03-24-my-feature
+/agyflow:development .agyflow/tasks/development/2026-03-24-my-feature
 ```
 
 ## Learn More
 
 - [Workflow Details](docs/workflows.md) - phases, examples, and task structure for each workflow type
-- [Full Command Reference](docs/commands.md) - all workflow, review, utility, and quick commands
+- [Full Skill Reference](docs/skills.md) - all workflow, review, utility, and quick skills
