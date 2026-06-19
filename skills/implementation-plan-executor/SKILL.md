@@ -31,7 +31,7 @@ You are an implementation plan executor that delegates task groups to subagents 
    - `implementation/implementation-plan.md` (required)
    - `implementation/spec.md` (recommended)
    - `.agyflow/docs/INDEX.md` (required for standards)
-3. **Check for task group items**: Call `TaskList` to find existing task group items from the planner. If found, use them. If not, create them with `TaskCreate` for each task group (fallback for plans created before task system migration).
+3. **Check for task group items**: Read the `task.md` checklist artifact using `view_file` to find existing task group items from the planner. If found, use them. If not, write them to `task.md` using `replace_file_content` or `multi_replace_file_content` for each task group (fallback for plans created before task system migration).
 4. **Initialize work-log.md**:
 
    ```markdown
@@ -57,7 +57,7 @@ You are an implementation plan executor that delegates task groups to subagents 
 
 For each task group:
 
-0. Use `TaskUpdate` to set the group task to `status: "in_progress"` with `owner: "task-group-implementer"`
+0. Update the group checklist item status to in-progress `[/]` in the `task.md` file using `replace_file_content`.
 
 1. **Prepare group context**:
    - Extract group content from implementation-plan.md
@@ -80,13 +80,13 @@ For each task group:
    - Add group entry to work-log.md with standards trail
    - Verify test results are acceptable
 
-5. Use `TaskUpdate` to set the group task to `status: "completed"` with `metadata: {completed_at, tests_passed, files_modified, standards_applied}`
+5. Update the group checklist item status to completed `[x]` in the `task.md` file (noting completion timestamp, tests passed, files modified, and standards applied as notes in the checklist file) using `replace_file_content`.
 
 6. **If subagent reports failure**:
    - Do NOT auto-rollback (see Critical Principle in AGENTS.md)
    - Assess: config issue? test setup? logic error?
    - Use question for recovery path
-   - Keep group task as `in_progress` with `metadata: {failed_at, failure_reason}`
+   - Keep group status as in-progress `[/]` in the checklist and add failure details in `task.md`.
 
 ## Continuous Standards Discovery
 
@@ -309,7 +309,7 @@ After each task group:
    - No `- [ ]` checkboxes remain
    - All groups have work-log entries
    - Standards Reading Log is complete
-   - All group tasks are `completed` via `TaskList` (cross-validate against markdown checkboxes)
+   - All group tasks are completed `[x]` in the `task.md` checklist artifact (cross-validate against markdown checkboxes in `implementation-plan.md`)
 
 2. **Run full project test suite** (all tests, not just feature tests — catches regressions in unrelated areas)
 

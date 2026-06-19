@@ -63,7 +63,7 @@ For all analysis, planning, implementation, and verification phases: **ALWAYS DE
 
 All orchestrators pause at `→ Pause` transitions for user review and prompt for optional phases.
 
-**State ordering rule**: Phase state MUST NOT be updated to 'completed' (via orchestrator-state.yml or TaskUpdate) until AFTER the user responds to the exit gate. Correct sequence: finish phase work → call question → receive user response → update state to completed.
+**State ordering rule**: Phase state MUST NOT be updated to 'completed' (via orchestrator-state.yml or the task checklist artifact `task.md`) until AFTER the user responds to the exit gate. Correct sequence: finish phase work → call question → receive user response → update state and checklist status to completed.
 
 ### Phase Entry Checks
 
@@ -95,7 +95,7 @@ When a phase ends with `→ **AUTO-CONTINUE**`:
 | Saying "I'll pause here" without tool call                                        | Words are not pauses. Tool invocation required.                                                                                                                          |
 | Auto-accepting subagent decisions without asking                                  | User must consent to scope/approach decisions                                                                                                                            |
 | Outputting a summary after phase work, then ending turn before reaching `→ Pause` | Gate is skipped; user loses control at the most critical review point. The gate must be the FIRST action after phase work completes — no summaries, no output before it. |
-| Marking phase as completed (state/TaskUpdate) before the exit gate executes       | State corruption — downstream phases see false "completed" status. Gate → user response → state update. Never reverse this order.                                        |
+| Marking phase as completed (state/task.md) before the exit gate executes       | State corruption — downstream phases see false "completed" status. Gate → user response → state update. Never reverse this order.                                        |
 
 ---
 
@@ -202,7 +202,7 @@ Refer to `verification_context` in the template [src/templates/orchestrator-stat
 2. **Determine starting phase**: New task starts Phase 1; resume reads state for first incomplete phase
 3. **Create task directory**: Standard structure with analysis/, implementation/, verification/, documentation/ _(skip on resume)_
 4. **Create state file**: `orchestrator-state.yml` _(skip on resume)_
-5. **Create task items**: `TaskCreate` for all phases, then `TaskUpdate addBlockedBy` for dependencies. On resume, also restore completed phase statuses.
+5. **Initialize task checklist**: Use `write_to_file` to write a markdown checklist (`task.md`) in the task directory for all phases (see Phase Configuration), passing metadata: `IsArtifact: true` and `ArtifactMetadata.ArtifactType: "task"`. Document sequential phase dependencies. On resume, read the checklist using `view_file` to check phase states.
 6. **Output summary**: Show task info, phases, starting message
 
 ### Task Name Generation
@@ -213,14 +213,13 @@ Refer to `verification_context` in the template [src/templates/orchestrator-stat
 
 Examples: "Fix login timeout bug" → `2025-12-17-fix-login-timeout`
 
-### Task Restoration on Resume
+### Task Checklist Persistence on Resume
 
-Task system IDs are ephemeral to a session. On resume:
+Because Antigravity CLI uses a persistent file-based checklist (`task.md`), checklist states are naturally preserved across sessions/compaction boundaries. On resume:
 
-1. Create all phase tasks (same `TaskCreate` loop, all start pending)
-2. Set dependencies (same `TaskUpdate addBlockedBy`)
-3. Mark completed phases (`TaskUpdate` to `completed` with `metadata: {restored: true}`)
-4. Update state with new task IDs
+1. Use `view_file` to read the existing task checklist `task.md`.
+2. Cross-reference the checklist with `completed_phases` in `orchestrator-state.yml`.
+3. If there are any discrepancies, update `task.md` using `replace_file_content` to match the state file.
 
 ### Resume Logic
 
@@ -228,7 +227,7 @@ Task system IDs are ephemeral to a session. On resume:
 2. **Validate artifacts** — Check expected files for `completed_phases`. If missing, remove from list.
 3. **Find resume point** — First phase not in `completed_phases`
 4. **Check prerequisites** — Verify required artifacts exist
-5. **Restore task items** — Re-create phase tasks and mark completed ones
+5. **Restore task checklist** — Read the existing `task.md` to verify completion alignment
 
 | Starting From  | Required Prerequisites           |
 | -------------- | -------------------------------- |

@@ -20,8 +20,8 @@ Systematic migration workflow from current state analysis to verified migration 
 
 ### Step 2: Initialize Workflow
 
-1. **Create Task Items**: Use `TaskCreate` for all phases (see Phase Configuration), then set dependencies with `TaskUpdate addBlockedBy`
-2. **Create Task Directory**: `.agyflow/tasks/migrations/YYYY-MM-DD-task-name/`
+1. **Create Task Directory**: `.agyflow/tasks/migrations/YYYY-MM-DD-task-name/`
+2. **Create Task Checklist**: Use `write_to_file` to write a markdown checklist (`task.md`) in the task directory for all phases (see Phase Configuration), passing metadata: `IsArtifact: true` and `ArtifactMetadata.ArtifactType: "task"`. Document sequential phase dependencies.
 3. **Initialize State**: Create `orchestrator-state.yml` with migration context
 4. **Discover project documentation**: Read `.agyflow/docs/INDEX.md` (if exists), extract ALL file paths from the "Project Documentation" section — includes predefined docs AND any user-added project docs. Store as `project_context.project_doc_paths` in state.
 
@@ -177,7 +177,7 @@ question - Display executive summary before asking. Read `implementation/spec.md
 
 - Invoke Skill tool: `diagrams-mermaid` for `implementation/implementation-plan.md`
 - Add one migration execution/state flow with rollback checkpoints.
-- Preserve written task steps and rollback details as source of truth.
+- Preserve written task steps and rollback details in the implementation plan.
 
 → Pause
 

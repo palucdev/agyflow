@@ -40,11 +40,11 @@ Each orchestrator reads the framework reference file at initialization (Step 1):
 
 All orchestrators follow these principles:
 
-1. **State-Driven Execution**: `orchestrator-state.yml` is source of truth
+1. **State-Driven Execution**: `orchestrator-state.yml` (or `task.yml` for quick workflows) is the sole source of truth
 2. **Resume Capability**: Any orchestrator can be paused and resumed
 3. **Interactive**: Pause after each phase for user review
 4. **User-Confirmed Rollback**: Never auto-rollback without user approval
-5. **Task Progress**: Always track progress with TaskCreate/TaskUpdate tools
+5. **Task Progress**: Always track progress with task checklist artifacts (using `write_to_file` and `replace_file_content`)
 6. **Standards Discovery**: Reference `.agyflow/docs/INDEX.md` throughout
 
 ## Orchestrators Using This Framework

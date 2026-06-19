@@ -668,26 +668,27 @@ Subagents are specialized AI agents invoked by skills and orchestrators. All age
 
 **For detailed workflow documentation, see**: individual skill `SKILL.md` files
 
-## Progress Tracking with Task System
+## Progress Tracking with Task Artifacts
 
-All orchestrators use `TaskCreate`/`TaskUpdate` for real-time progress visibility at two levels:
+Antigravity CLI uses a file-based task checklist system instead of internal UI task state APIs. There are no dedicated task management tools like `TaskCreate`, `TaskUpdate`, or `TaskList`. Instead, agents create and manage task checklists via direct file manipulation using standard filesystem tools:
+
+- **Creating Checklist (`TaskCreate` analogue)**: Use `write_to_file` to write a markdown checklist (`task.md`) in the task directory (`.agyflow/tasks/[type]/[task-name]/task.md`). You must pass metadata: `IsArtifact: true` and `ArtifactMetadata.ArtifactType: "task"`.
+- **Updating Status (`TaskUpdate` analogue)**: Use `replace_file_content` or `multi_replace_file_content` to physically edit the markdown file, changing `- [ ]` to `- [x]` (or `- [/]` for in progress). If the overall plan needs to pivot, simply rewrite the checklist using `write_to_file` with `Overwrite: true`.
+- **The manage_task Trap**: The `manage_task` tool is strictly for managing background shell processes (e.g., listing, killing, or getting the status of background CLI commands). It has absolutely nothing to do with to-do lists, checkboxes, or checklist state.
+
+Progress is tracked at two levels:
 
 ### Orchestrator Phase Tracking
 
-- At workflow start: `TaskCreate` for all phases (pending), then `TaskUpdate addBlockedBy` for phase dependencies
-- At each phase: `TaskUpdate` to `in_progress` (shows spinner with `activeForm`) → execute → `TaskUpdate` to `completed`
-- Optionally set `owner` when delegating to skills/agents, and `metadata` for timing/artifacts
-- State file (`orchestrator-state.yml`) is source of truth for resume logic
-- Task system mirrors state for UX and provides dependency visualization
+- At workflow start: Initialize the phase checklist in the task's `task.md` (e.g. Phase 1 through Phase N, listing sequential dependencies and current status).
+- At each phase: Update the phase status in `task.md` (e.g., `- [ ] Phase 1` to `- [/] Phase 1` or `- [x] Phase 1`).
+- The state file (`orchestrator-state.yml` or `task.yml`) is the sole source of truth for all workflow execution, phase completion, and resume logic. The checklist file (`task.md`) and any markdown checkboxes are visual representations mirroring this state for user transparency.
 
 ### Implementation Task Group Tracking
 
-- At planning: `TaskCreate` for each task group with dependencies mirroring the plan
-- During execution: `TaskUpdate` to `in_progress` with `owner` → execute → `TaskUpdate` to `completed` with metadata
-- Markdown checkboxes in `implementation-plan.md` remain the step-level source of truth
-- Task system provides group-level visibility with dependencies, timing, and ownership
-
-See individual orchestrator `skill.md` files for phase-specific task tables.
+- At planning: Document each task group with checkboxes in the task's `task.md` or `implementation-plan.md`.
+- During execution: Update task group checklist item statuses to in-progress (`[/]`) or completed (`[x]`).
+- The YAML state file (`orchestrator-state.yml` or `task.yml`) remains the sole source of truth; markdown checkboxes in `implementation-plan.md` and `task.md` are kept in sync solely for visual transparency.
 
 ## Hooks
 

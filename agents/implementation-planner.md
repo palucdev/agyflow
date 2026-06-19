@@ -188,24 +188,25 @@ Follow standards from `.agyflow/docs/standards/`:
 
 ---
 
-### Phase 4.5: Create Task Group Items
+### Phase 4.5: Update Task Checklist Artifact
 
-After writing the implementation plan file, create structured task items for group-level tracking:
+After writing the implementation plan file, update the file-based task checklist (`task.md`) for group-level tracking:
 
-1. For each task group, call `TaskCreate`:
-   - `subject`: "Group N: [Layer Name]" (e.g., "Group 1: Database Layer")
-   - `description`: Acceptance criteria + step count + dependency info
-   - `activeForm`: "Implementing [Layer Name]"
+1. For each task group, append checklist items to `task.md`:
+   - e.g., `- [ ] Group N: [Layer Name]` (e.g., "Group 1: Database Layer")
+   - Include brief descriptions of acceptance criteria, step counts, and dependencies.
 
-2. Set dependencies with `TaskUpdate addBlockedBy` mirroring the plan's dependency chain:
+2. Document dependencies mirroring the plan's dependency chain in the checklist:
    - Database → API → Frontend (matches `Dependencies:` field in each group)
    - All implementation groups → Test Review & Gap Analysis (if present)
 
-**Why both markdown AND Task system?**
+Use `replace_file_content` or `multi_replace_file_content` to perform these updates.
 
-- Markdown checkboxes = step-level tracking (N.1, N.2, etc.) + resume source of truth
-- Task system = group-level visibility with dependencies, timing, ownership
-- They complement each other at different granularity levels
+**Why both implementation-plan.md AND the task checklist?**
+
+- `implementation-plan.md` contains detailed step-level tracking (N.1, N.2, etc.) for visual reference and granular steps. The YAML state file (`orchestrator-state.yml` or `task.yml`) is the sole source of truth for execution.
+- The `task.md` checklist artifact provides high-level orchestrator-level progress tracking with group status and ownership.
+- They complement each other at different granularity levels.
 
 ---
 
@@ -252,10 +253,10 @@ Before completing, verify:
 | --------------------------------------- | ---------------------------- |
 | `implementation/implementation-plan.md` | Complete implementation plan |
 
-### Task Items Created
+### Task Checklist Updates
 
-- One `TaskCreate` per task group
-- Dependencies set via `TaskUpdate addBlockedBy`
+- Add task group items to the `task.md` checklist using `replace_file_content`
+- Dependencies documented clearly in the checklist structure
 
 ### Structured Result (returned to orchestrator)
 
