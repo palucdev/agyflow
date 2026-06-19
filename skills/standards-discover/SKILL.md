@@ -58,7 +58,7 @@ Custom scope values are matched against existing `.agyflow/docs/standards/*/` di
 | 8     | Apply approved standards         | Applying standards                 |
 | 9     | Generate summary report          | Generating summary                 |
 
-**Task Tracking**: At start of Phase 1, use `TaskCreate` for all phases above (pending). Set dependencies: Phases 2-5 blocked by Phase 1 (they run in parallel after planning). Phase 6 blocked by Phases 2-5. Phases 7-9 sequential. At each phase start: `TaskUpdate` to `in_progress`. At each phase end: `TaskUpdate` to `completed`. For phases skipped due to scope (e.g., Phases 3-4 when `--scope=quick`), mark `completed` with `metadata: {skipped: true, reason: "scope=quick"}`.
+**Task Tracking**: At start of Phase 1, initialize a task checklist (`task.md`) for all phases using `write_to_file` (with metadata `IsArtifact: true` and `ArtifactMetadata.ArtifactType: "task"`). Set dependencies/ordering in the checklist. At each phase start: update the status to in-progress `[/]`. At each phase end: update the status to completed `[x]` using `replace_file_content` or `multi_replace_file_content`. For phases skipped due to scope (e.g., Phases 3-4 when `--scope=quick`), mark as completed `[x]` with a skipped note in the checklist.
 
 ---
 

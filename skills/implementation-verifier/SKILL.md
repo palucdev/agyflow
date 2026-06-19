@@ -56,15 +56,15 @@ You are an implementation verifier that orchestrates comprehensive quality assur
    - `implementation/work-log.md` (required)
 3. **Read docs/INDEX.md** to understand available standards
 4. **Determine invocation context** (orchestrator or standalone)
-5. **Create task items for verification tracking** using `TaskCreate` tool:
-   - Subject: "Completeness check", activeForm: "Checking implementation completeness"
-   - Subject: "Test suite", activeForm: "Running test suite" — only if NOT skip_test_suite. When skip_test_suite is true, create task pre-completed with `metadata: {skipped: true, reason: "Full test suite passed during implementation phase"}`
-   - Subject: "Code review", activeForm: "Running code review" — only if code_review_enabled
-   - Subject: "Pragmatic review", activeForm: "Running pragmatic review" — only if pragmatic_review_enabled
-   - Subject: "Production readiness", activeForm: "Checking production readiness" — only if production_check_enabled
-   - Subject: "Reality assessment", activeForm: "Running reality assessment" — only if reality_check_enabled
-   - Subject: "Compile report", activeForm: "Compiling verification report"
-6. **Set dependencies** using `TaskUpdate` with `addBlockedBy`: "Compile report" blocked by ALL verification tasks above
+5. **Add verification steps to the task checklist** in `task.md` using `replace_file_content` or `multi_replace_file_content`:
+   - "Completeness check"
+   - "Test suite" — only if NOT skip_test_suite. When skip_test_suite is true, mark as completed `[x]` with reason: "Full test suite passed during implementation phase"
+   - "Code review" — only if code_review_enabled
+   - "Pragmatic review" — only if pragmatic_review_enabled
+   - "Production readiness" — only if production_check_enabled
+   - "Reality assessment" — only if reality_check_enabled
+   - "Compile report"
+6. Document in `task.md` that "Compile report" depends on the completion of ALL verification tasks above.
 
 If prerequisites missing, report and stop.
 
@@ -97,7 +97,7 @@ If prerequisites missing, report and stop.
 
 ### Step 2: Set all tasks to in_progress
 
-2. Use `TaskUpdate` to set ALL enabled verification tasks to `status: "in_progress"`. For skipped optional reviews, use `TaskUpdate` with `status: "completed"` and `metadata: {"skipped": true}`.
+2. Update the status of ALL enabled verification checklist items in `task.md` to in-progress `[/]`. For skipped optional reviews, mark them as completed `[x]` with a skipped note, using `replace_file_content` or `multi_replace_file_content`.
 
 ### Step 3a: Run test suite (sequential, if NOT skip_test_suite)
 
@@ -155,7 +155,7 @@ Task tool call (if reality_check_enabled):
 
 After ALL subagents return:
 
-1. Use `TaskUpdate` to set each verification task to `status: "completed"`
+1. Update each verification checklist item to completed `[x]` in `task.md` using `replace_file_content` or `multi_replace_file_content`
 2. Extract status, issues, and findings from each
 3. Aggregate issue counts
 4. Track any critical issues that would affect overall verdict
@@ -171,7 +171,7 @@ After ALL subagents return:
 
 ## Phase 3: Compile Verification Report
 
-Use `TaskUpdate` to set "Compile report" task to `status: "in_progress"`.
+Update the status of "Compile report" checklist item to in-progress `[/]` in `task.md` using `replace_file_content`.
 
 1. **Compile all findings** from Phase 2
 2. **Determine overall status**:
@@ -185,7 +185,7 @@ Use `TaskUpdate` to set "Compile report" task to `status: "in_progress"`.
    **When tests skipped** (`skip_test_suite: true`): Test pass rate is inherited from implementation phase (assumed passing since implementation completed successfully). Note this in the report.
 
 3. **Write verification report** to `verification/implementation-verification.md`
-4. Use `TaskUpdate` to set "Compile report" task to `status: "completed"`
+4. Update "Compile report" checklist item to completed `[x]` in `task.md` using `replace_file_content`.
 
    Structure:
    - Executive summary (2-3 sentences)

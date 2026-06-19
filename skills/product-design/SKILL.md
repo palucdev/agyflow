@@ -34,10 +34,10 @@ Interactive workflow for product and feature design -- from fuzzy idea to develo
 
 ### Step 3: Initialize Workflow
 
-1. **Create Task Items**: Use `TaskCreate` for all phases (see Phase Configuration), then set dependencies with `TaskUpdate addBlockedBy`
-2. **Create Task Directory**: `.agyflow/tasks/product-design/YYYY-MM-DD-task-name/`
+1. **Create Task Directory**: `.agyflow/tasks/product-design/YYYY-MM-DD-task-name/`
    - Create `context/` folder with `README.md` instructing users to drop relevant files there (meeting transcripts, existing designs, spreadsheets, docs, PDFs, images)
    - Create `analysis/` and `outputs/` directories
+2. **Create Task Checklist**: Use `write_to_file` to write a markdown checklist (`task.md`) in the task directory for all phases (see Phase Configuration), passing metadata: `IsArtifact: true` and `ArtifactMetadata.ArtifactType: "task"`. Document sequential phase dependencies.
 3. **Initialize State**: Create `orchestrator-state.yml` with design context schema (see Domain Context section)
 
 **Output**:

@@ -24,7 +24,7 @@ Initialize `.agyflow/docs/` with intelligent project analysis and meaningful doc
 | 7     | Validate                           | Validating initialization        |
 | 8     | Discover coding standards          | Discovering coding standards     |
 
-**Task Tracking**: Before Phase 1, use `TaskCreate` for all phases (pending), then set sequential dependencies with `TaskUpdate addBlockedBy`. At each phase: `TaskUpdate` to `in_progress` → execute → `TaskUpdate` to `completed`. If skipped (e.g., user selects "Update existing"), mark skipped phases as `completed` with `metadata: {skipped: true}`.
+**Task Tracking**: Before Phase 1, initialize a task checklist (`task.md`) for all phases using `write_to_file` (with metadata `IsArtifact: true` and `ArtifactMetadata.ArtifactType: "task"`). At each phase: update the checklist item from pending `[ ]` to in-progress `[/]` → execute → update to completed `[x]` using `replace_file_content` or `multi_replace_file_content`. If skipped (e.g., user selects "Update existing"), mark skipped phases as completed `[x]` in the checklist with a skipped note.
 
 ---
 
