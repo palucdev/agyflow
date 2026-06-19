@@ -95,7 +95,7 @@ When a phase ends with `→ **AUTO-CONTINUE**`:
 | Saying "I'll pause here" without tool call                                        | Words are not pauses. Tool invocation required.                                                                                                                          |
 | Auto-accepting subagent decisions without asking                                  | User must consent to scope/approach decisions                                                                                                                            |
 | Outputting a summary after phase work, then ending turn before reaching `→ Pause` | Gate is skipped; user loses control at the most critical review point. The gate must be the FIRST action after phase work completes — no summaries, no output before it. |
-| Marking phase as completed (state/task.md) before the exit gate executes       | State corruption — downstream phases see false "completed" status. Gate → user response → state update. Never reverse this order.                                        |
+| Marking phase as completed (state/task.md) before the exit gate executes          | State corruption — downstream phases see false "completed" status. Gate → user response → state update. Never reverse this order.                                        |
 
 ---
 
@@ -215,7 +215,7 @@ Examples: "Fix login timeout bug" → `2025-12-17-fix-login-timeout`
 
 ### Task Checklist Persistence on Resume
 
-Because Antigravity CLI uses a persistent file-based checklist (`task.md`), checklist states are naturally preserved across sessions/compaction boundaries. On resume:
+Usage of a persistent file-based checklist (`task.md`), checklist states are naturally preserved across sessions/compaction boundaries. On resume:
 
 1. Use `view_file` to read the existing task checklist `task.md`.
 2. Cross-reference the checklist with `completed_phases` in `orchestrator-state.yml`.

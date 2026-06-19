@@ -539,11 +539,11 @@ All orchestrators support resuming from a specific phase via state restoration f
 
 ### Setup & Standards
 
-| Skill | Description / Purpose |
-| :--- | :--- |
-| `flow-init` | Initialize framework with project analysis and smart defaults for docs/standards. Optionally copy standards from another project. |
-| `standards-update` | Update/create standards from conversation context, or sync from another project. |
-| `standards-discover` | Discover standards from config files and code patterns. |
+| Skill                | Description / Purpose                                                                                                             |
+| :------------------- | :-------------------------------------------------------------------------------------------------------------------------------- |
+| `flow-init`          | Initialize framework with project analysis and smart defaults for docs/standards. Optionally copy standards from another project. |
+| `standards-update`   | Update/create standards from conversation context, or sync from another project.                                                  |
+| `standards-discover` | Discover standards from config files and code patterns.                                                                           |
 
 > **Note**: These skills delegate file operations to the internal `docs-manager` skill.
 
@@ -551,44 +551,45 @@ All orchestrators support resuming from a specific phase via state restoration f
 
 Each workflow skill handles both new tasks and resuming existing ones.
 
-| Skill | Purpose | Task Directory |
-| :--- | :--- | :--- |
-| `development` | Unified workflow for all development tasks (bugs, features, enhancements). | `.agyflow/tasks/development/` |
-| `performance` | Performance optimization with bottleneck detection. | `.agyflow/tasks/performance/` |
-| `migration` | Code/data/architecture migration workflows. | `.agyflow/tasks/migrations/` |
-| `research` | Comprehensive research with synthesis and solution brainstorming. | `.agyflow/tasks/research/` |
-| `product-design` | Interactive product/feature design with visual prototyping. | `.agyflow/tasks/product-design/` |
+| Skill            | Purpose                                                                    | Task Directory                   |
+| :--------------- | :------------------------------------------------------------------------- | :------------------------------- |
+| `development`    | Unified workflow for all development tasks (bugs, features, enhancements). | `.agyflow/tasks/development/`    |
+| `performance`    | Performance optimization with bottleneck detection.                        | `.agyflow/tasks/performance/`    |
+| `migration`      | Code/data/architecture migration workflows.                                | `.agyflow/tasks/migrations/`     |
+| `research`       | Comprehensive research with synthesis and solution brainstorming.          | `.agyflow/tasks/research/`       |
+| `product-design` | Interactive product/feature design with visual prototyping.                | `.agyflow/tasks/product-design/` |
 
 **Research-Based Development**: Start development informed by a completed research workflow:
+
 - The agent copies research artifacts to `analysis/research-context/` and passes summaries to every subagent.
 - The path to a completed research folder (e.g. `.agyflow/tasks/research/2026-01-12-oauth-research`) is supplied to guide the development workflow.
 
 ### Review & Audit Skills
 
-| Skill | Purpose |
-| :--- | :--- |
-| `reviews-code` | Automated code quality, security, performance analysis. |
-| `reviews-pragmatic` | Detect over-engineering, ensure code matches project scale. |
-| `reviews-spec-audit` | Independent spec audit for completeness and clarity. |
-| `reviews-reality-check` | Validate work actually solves the problem. |
-| `reviews-production-readiness` | Pre-deployment verification with GO/NO-GO recommendation. |
+| Skill                          | Purpose                                                     |
+| :----------------------------- | :---------------------------------------------------------- |
+| `reviews-code`                 | Automated code quality, security, performance analysis.     |
+| `reviews-pragmatic`            | Detect over-engineering, ensure code matches project scale. |
+| `reviews-spec-audit`           | Independent spec audit for completeness and clarity.        |
+| `reviews-reality-check`        | Validate work actually solves the problem.                  |
+| `reviews-production-readiness` | Pre-deployment verification with GO/NO-GO recommendation.   |
 
 ### Quick Skills
 
 For smaller tasks that don't need a full workflow. These create lightweight task directories with `task.yml` instead of `orchestrator-state.yml` for metadata tracking.
 
-| Skill | Purpose | Task Directory |
-| :--- | :--- | :--- |
-| `quick-plan` | Enter planning mode with standards awareness before coding. | `.agyflow/tasks/quick-plan/` |
-| `quick-dev` | Implement directly with standards applied (no planning). | `.agyflow/tasks/quick-dev/` |
-| `quick-bugfix` | Quick TDD-driven bug fix with TDD red/green gates. | `.agyflow/tasks/quick-bugfix/` |
+| Skill          | Purpose                                                     | Task Directory                 |
+| :------------- | :---------------------------------------------------------- | :----------------------------- |
+| `quick-plan`   | Enter planning mode with standards awareness before coding. | `.agyflow/tasks/quick-plan/`   |
+| `quick-dev`    | Implement directly with standards applied (no planning).    | `.agyflow/tasks/quick-dev/`    |
+| `quick-bugfix` | Quick TDD-driven bug fix with TDD red/green gates.          | `.agyflow/tasks/quick-bugfix/` |
 
 ### Content & Visualization Skills
 
-| Skill | Purpose |
-| :--- | :--- |
-| `diagrams-mermaid` | Generate Mermaid diagrams from natural language. |
-| `html-renderer` | Render markdown into self-contained HTML with warm styling. |
+| Skill              | Purpose                                                     |
+| :----------------- | :---------------------------------------------------------- |
+| `diagrams-mermaid` | Generate Mermaid diagrams from natural language.            |
+| `html-renderer`    | Render markdown into self-contained HTML with warm styling. |
 
 **See**: Individual `skills/*/SKILL.md` files for detailed documentation.
 
@@ -638,12 +639,12 @@ Subagents are specialized AI agents invoked by skills and orchestrators. All age
 
 ### Verification Agents
 
-| Agent                                 | Purpose                                                             | Invoked By                                                            | Details                                         |
-| ------------------------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------- | ----------------------------------------------- |
-| `implementation-completeness-checker` | Plan completion + standards compliance + documentation completeness | implementation-verifier                                               | `agents/implementation-completeness-checker.md` |
-| `test-suite-runner`                   | Runs full test suite, analyzes results, flags regressions           | implementation-verifier                                               | `agents/test-suite-runner.md`                   |
-| `code-reviewer`                       | Automated code quality, security, performance analysis              | implementation-verifier, standalone review                             | `agents/code-reviewer.md`                       |
-| `production-readiness-checker`        | Pre-deployment verification with GO/NO-GO recommendation            | implementation-verifier, performance orchestrator, standalone review   | `agents/production-readiness-checker.md`        |
+| Agent                                 | Purpose                                                             | Invoked By                                                           | Details                                         |
+| ------------------------------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------- |
+| `implementation-completeness-checker` | Plan completion + standards compliance + documentation completeness | implementation-verifier                                              | `agents/implementation-completeness-checker.md` |
+| `test-suite-runner`                   | Runs full test suite, analyzes results, flags regressions           | implementation-verifier                                              | `agents/test-suite-runner.md`                   |
+| `code-reviewer`                       | Automated code quality, security, performance analysis              | implementation-verifier, standalone review                           | `agents/code-reviewer.md`                       |
+| `production-readiness-checker`        | Pre-deployment verification with GO/NO-GO recommendation            | implementation-verifier, performance orchestrator, standalone review | `agents/production-readiness-checker.md`        |
 
 ### Review & Audit Agents
 
@@ -670,10 +671,8 @@ Subagents are specialized AI agents invoked by skills and orchestrators. All age
 
 ## Progress Tracking with Task Artifacts
 
-Antigravity CLI uses a file-based task checklist system instead of internal UI task state APIs. There are no dedicated task management tools like `TaskCreate`, `TaskUpdate`, or `TaskList`. Instead, agents create and manage task checklists via direct file manipulation using standard filesystem tools:
-
-- **Creating Checklist (`TaskCreate` analogue)**: Use `write_to_file` to write a markdown checklist (`task.md`) in the task directory (`.agyflow/tasks/[type]/[task-name]/task.md`). You must pass metadata: `IsArtifact: true` and `ArtifactMetadata.ArtifactType: "task"`.
-- **Updating Status (`TaskUpdate` analogue)**: Use `replace_file_content` or `multi_replace_file_content` to physically edit the markdown file, changing `- [ ]` to `- [x]` (or `- [/]` for in progress). If the overall plan needs to pivot, simply rewrite the checklist using `write_to_file` with `Overwrite: true`.
+- **Creating Checklist**: Use `write_to_file` to write a markdown checklist (`task.md`) in the task directory (`.agyflow/tasks/[type]/[task-name]/task.md`). You must pass metadata: `IsArtifact: true` and `ArtifactMetadata.ArtifactType: "task"`.
+- **Updating Status**: Use `replace_file_content` or `multi_replace_file_content` to physically edit the markdown file, changing `- [ ]` to `- [x]` (or `- [/]` for in progress). If the overall plan needs to pivot, simply rewrite the checklist using `write_to_file` with `Overwrite: true`.
 - **The manage_task Trap**: The `manage_task` tool is strictly for managing background shell processes (e.g., listing, killing, or getting the status of background CLI commands). It has absolutely nothing to do with to-do lists, checkboxes, or checklist state.
 
 Progress is tracked at two levels:
