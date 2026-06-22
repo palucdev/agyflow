@@ -1,4 +1,4 @@
-command: quick-dev
+skill: quick-dev
 title: "Short title from task description"
 description: "Full task description as provided by user"
 status: in_progress

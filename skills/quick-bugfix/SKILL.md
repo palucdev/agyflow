@@ -9,25 +9,25 @@ user-invocable: true
 
 Lightweight TDD-driven bug fix workflow with planning mode. Analyze the bug, present a fix plan for approval, then reproduce with a failing test, fix, and verify. No orchestrator state, no subagents. Creates lightweight task directory for artifact anchoring.
 
-For complex bugs that grow beyond a quick fix, suggests escalating to the full development workflow (`/development`).
+For complex bugs that grow beyond a quick fix, suggests escalating to the full development workflow (`/agyflow:development`).
 
 ## Usage
 
 ```bash
-/quick-bugfix "Login form submits twice on slow connections"
-/quick-bugfix "API returns 500 when email contains special characters"
-/quick-bugfix "Dark mode toggle doesn't persist after refresh"
+/agyflow:quick-bugfix "Login form submits twice on slow connections"
+/agyflow:quick-bugfix "API returns 500 when email contains special characters"
+/agyflow:quick-bugfix "Dark mode toggle doesn't persist after refresh"
 ```
 
 ## When to Use
 
-**Use `/quick-bugfix` when:**
+**Use `/agyflow:quick-bugfix` when:**
 
 - Bug is reasonably scoped and reproducible
 - You have a clear description of expected vs actual behavior
 - Fix likely touches a small number of files
 
-**Use `/development` instead when:**
+**Use `/agyflow:development` instead when:**
 
 - Bug requires architectural changes
 - Multiple subsystems are involved
@@ -79,7 +79,7 @@ For complex bugs that grow beyond a quick fix, suggests escalating to the full d
 **If not exists:**
 
 - Note that no standards are available
-- Suggest running `/flow-init` in completion message
+- Suggest running `/agyflow:flow-init` in completion message
 
 ### Standards Reading Enforcement (MANDATORY)
 
@@ -165,7 +165,7 @@ Use question:
 
 1. Ensure `analysis/findings.md` is written (above)
 2. Update `task.yml`: set `status: escalated`, `escalation_reason: "[signals detected]"`, `updated: [now]`
-3. Tell the user: "Run `/development .agyflow/tasks/quick-bugfix/YYYY-MM-DD-task-name` to continue with full workflow."
+3. Tell the user: "Run `/agyflow:development .agyflow/tasks/quick-bugfix/YYYY-MM-DD-task-name` to continue with full workflow."
 4. Do NOT set `escalated_to` — the development orchestrator will set it
 5. `summary.md` is NOT written on escalation
 
@@ -198,7 +198,7 @@ Standards context from Step 3 and analysis from Step 4 MUST inform the plan.
 ## Applicable Standards
 
 [List each standard file read, with key guidelines extracted from each.
-If no standards exist: "No AI SDLC standards found. Consider running `/flow-init`."]
+If no standards exist: "No AI SDLC standards found. Consider running `/agyflow:flow-init`."]
 
 ## Standards Compliance Checklist
 
@@ -256,7 +256,7 @@ If any section is missing, add it before asking for user approval.
 **If still failing after 3 attempts:**
 
 - Stop and present findings to the user
-- Suggest escalating to `/development` for a more thorough approach
+- Suggest escalating to `/agyflow:development` for a more thorough approach
 
 ### Step 8: Summary
 
@@ -265,7 +265,7 @@ If any section is missing, add it before asking for user approval.
 ```markdown
 # Task Summary
 
-**Command**: quick-bugfix
+**Skill**: quick-bugfix
 **Date**: YYYY-MM-DD
 **Status**: completed
 
@@ -315,6 +315,6 @@ If any section is missing, add it before asking for user approval.
 Proceed with the bug fix normally, then note:
 
 ```
-"No AI SDLC standards found. Consider running `/flow-init` to initialize
+"No AI SDLC standards found. Consider running `/agyflow:flow-init` to initialize
 project documentation and coding standards for better consistency."
 ```

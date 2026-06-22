@@ -7,9 +7,9 @@ agyflow provides five workflow types, each with phases tailored to its needs. Al
 The unified development workflow handles features, enhancements, and bug fixes through a 14-phase adaptive pipeline. Phases activate or skip based on task type.
 
 ```
-/development
-/development "Add two-factor authentication"
-/development "Fix login timeout" --type=bug
+/agyflow:development
+/agyflow:development "Add two-factor authentication"
+/agyflow:development "Fix login timeout" --type=bug
 ```
 
 When run without arguments, the plugin extracts the task description from your conversation and auto-detects the type (feature, bug, or enhancement). Use `--type=` only when you want to override the auto-detection.
@@ -40,7 +40,7 @@ When run without arguments, the plugin extracts the task description from your c
 Start development informed by a completed research workflow. Research context flows through all phases:
 
 ```
-/development "Implement OAuth" --research=.agyflow/tasks/research/2026-01-12-oauth-research
+/agyflow:development "Implement OAuth" --research=.agyflow/tasks/research/2026-01-12-oauth-research
 ```
 
 Research artifacts are copied to `analysis/research-context/` and summaries pass to every subagent.
@@ -48,7 +48,7 @@ Research artifacts are copied to `analysis/research-context/` and summaries pass
 ### Resume
 
 ```
-/development [task-path] [--from=PHASE] [--reset-attempts]
+/agyflow:development [task-path] [--from=PHASE] [--reset-attempts]
 ```
 
 Resume phases: `analysis`, `gap`, `spec`, `plan`, `implement`, `verify`
@@ -60,8 +60,8 @@ Resume phases: `analysis`, `gap`, `spec`, `plan`, `implement`, `verify`
 Static code analysis to detect bottlenecks, followed by standard spec/plan/implement/verify pipeline.
 
 ```
-/performance
-/performance "Optimize dashboard loading time"
+/agyflow:performance
+/agyflow:performance "Optimize dashboard loading time"
 ```
 
 ### Phases
@@ -83,7 +83,7 @@ Static code analysis to detect bottlenecks, followed by standard spec/plan/imple
 ### Resume
 
 ```
-/performance [task-path] [--from=PHASE] [--reset-attempts]
+/agyflow:performance [task-path] [--from=PHASE] [--reset-attempts]
 ```
 
 Resume phases: `analysis`, `specification`, `planning`, `implementation`, `verification`
@@ -95,8 +95,8 @@ Resume phases: `analysis`, `specification`, `planning`, `implementation`, `verif
 Technology, data, and architecture migrations with rollback planning and risk assessment.
 
 ```
-/migration
-/migration "Migrate from REST to GraphQL" --type=code
+/agyflow:migration
+/agyflow:migration "Migrate from REST to GraphQL" --type=code
 ```
 
 **Migration types**: `code`, `data`, `architecture`, `general`
@@ -124,7 +124,7 @@ Technology, data, and architecture migrations with rollback planning and risk as
 ### Resume
 
 ```
-/migration [task-path] [--from=PHASE] [--reset-attempts]
+/agyflow:migration [task-path] [--from=PHASE] [--reset-attempts]
 ```
 
 Resume phases: `analysis`, `target`, `spec`, `plan`, `execute`, `verify`, `docs`
@@ -136,8 +136,8 @@ Resume phases: `analysis`, `target`, `spec`, `plan`, `execute`, `verify`, `docs`
 Multi-source research with synthesis, optional solution brainstorming, and high-level design.
 
 ```
-/research
-/research "What authentication approach fits our architecture?" --type=technical
+/agyflow:research
+/agyflow:research "What authentication approach fits our architecture?" --type=technical
 ```
 
 **Research types**: `technical`, `requirements`, `literature`, `mixed`
@@ -162,7 +162,7 @@ Information gathering runs parallel subagents across multiple source categories 
 ### Resume
 
 ```
-/research [task-path] [--from=PHASE] [--reset-attempts]
+/agyflow:research [task-path] [--from=PHASE] [--reset-attempts]
 ```
 
 Resume phases: `foundation`, `brainstorming-decision`, `brainstorming`, `design`, `outputs`, `verification`, `integration`
@@ -174,9 +174,9 @@ Resume phases: `foundation`, `brainstorming-decision`, `brainstorming`, `design`
 Interactive workflow for designing features and products before building them. Transforms ideas into structured product briefs through collaborative exploration, iterative refinement, and visual prototyping. Phases adapt based on design characteristics (greenfield vs enhancement, simple vs complex, UI-focused vs backend).
 
 ```
-/product-design
-/product-design "Design a dashboard for monitoring API usage"
-/product-design --research=.agyflow/tasks/research/2026-01-12-auth-research
+/agyflow:product-design
+/agyflow:product-design "Design a dashboard for monitoring API usage"
+/agyflow:product-design --research=.agyflow/tasks/research/2026-01-12-auth-research
 ```
 
 When run without arguments, the plugin extracts the design brief from your conversation.
@@ -202,13 +202,13 @@ Phases 2, 5, and 6 include iterative refinement loops — you can request revisi
 The output is a structured product brief that can be passed directly to the development workflow:
 
 ```
-/development .agyflow/tasks/product-design/2026-03-10-api-dashboard
+/agyflow:development .agyflow/tasks/product-design/2026-03-10-api-dashboard
 ```
 
 ### Resume
 
 ```
-/product-design [task-path] [--from=PHASE] [--reset-attempts]
+/agyflow:product-design [task-path] [--from=PHASE] [--reset-attempts]
 ```
 
 Resume phases: `context`, `synthesis`, `problem`, `personas`, `alternatives`, `convergence`, `specification`, `prototyping`, `handoff`

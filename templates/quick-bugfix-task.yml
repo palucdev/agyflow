@@ -1,4 +1,4 @@
-command: quick-bugfix
+skill: quick-bugfix
 title: "Short title from bug description"
 description: "Full bug description as provided by user"
 status: in_progress

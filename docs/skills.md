@@ -1,15 +1,15 @@
-# Command Reference
+# Skill Reference
 
 ## Unified Entry Point
 
-### `/work [input]`
+### `/agyflow:work [input]`
 
 Auto-classifies your task and routes to the appropriate workflow. Accepts:
 
 - **No arguments**: Extracts the task from your current conversation context
-- Task description: `/work "Add user profile page"`
-- Task folder path: `/work .agyflow/tasks/new-features/2026-02-17-user-profile` (resumes)
-- GitHub issue URL: `/work https://github.com/org/repo/issues/42`
+- Task description: `/agyflow:work "Add user profile page"`
+- Task folder path: `/agyflow:work .agyflow/tasks/new-features/2026-02-17-user-profile` (resumes)
+- GitHub issue URL: `/agyflow:work https://github.com/org/repo/issues/42`
 
 The plugin classifies the task type with confidence scoring, asks for confirmation, then launches the matching orchestrator.
 
@@ -17,7 +17,7 @@ The plugin classifies the task type with confidence scoring, asks for confirmati
 
 ## Development
 
-### `/development [description | task-path]`
+### `/agyflow:development [description | task-path]`
 
 Starts the unified development workflow (14 adaptive phases) or resumes an existing one. All arguments are optional — when run without a description, the plugin extracts it from your current conversation. Pass an existing task path to resume. Task type (bug/enhancement/feature) is auto-detected from context when `--type` is omitted.
 
@@ -38,7 +38,7 @@ Starts the unified development workflow (14 adaptive phases) or resumes an exist
 
 ## Performance
 
-### `/performance [description | task-path]`
+### `/agyflow:performance [description | task-path]`
 
 Starts performance optimization with static bottleneck analysis (9 phases) or resumes an existing one. Can be run without arguments — the plugin extracts the optimization target from your conversation. Detects N+1 queries, missing indexes, O(n^2) algorithms, blocking I/O, and memory leak patterns.
 
@@ -56,7 +56,7 @@ You can optionally provide profiling data (flame graphs, APM screenshots) — th
 
 ## Migration
 
-### `/migration [description | task-path]`
+### `/agyflow:migration [description | task-path]`
 
 Starts migration workflow (8 phases) with mandatory rollback planning and risk assessment, or resumes an existing one. Can be run without arguments — the plugin extracts migration details from your conversation.
 
@@ -73,7 +73,7 @@ Starts migration workflow (8 phases) with mandatory rollback planning and risk a
 
 ## Research
 
-### `/research [question | task-path]`
+### `/agyflow:research [question | task-path]`
 
 Starts research workflow (8 phases) with multi-source gathering, synthesis, and optional solution brainstorming, or resumes an existing one. Can be run without arguments — the plugin extracts the research question from your conversation.
 
@@ -85,7 +85,7 @@ Starts research workflow (8 phases) with multi-source gathering, synthesis, and 
 | `--from=PHASE`                                      | Start from or resume at a specific phase |
 | `--reset-attempts`                                  | Reset failed attempt counters (resume)   |
 
-Research output can feed into development: `/development --research=.agyflow/tasks/research/...`
+Research output can feed into development: `/agyflow:development --research=.agyflow/tasks/research/...`
 
 **Task directory**: `.agyflow/tasks/research/`
 **Resume phases**: `foundation`, `brainstorming-decision`, `brainstorming`, `design`, `outputs`, `verification`, `integration`
@@ -94,7 +94,7 @@ Research output can feed into development: `/development --research=.agyflow/tas
 
 ## Product Design
 
-### `/product-design [description | task-path]`
+### `/agyflow:product-design [description | task-path]`
 
 Starts the interactive product/feature design workflow (9 adaptive phases) or resumes an existing one. Transforms ideas into structured product briefs through collaborative exploration, iterative refinement, and visual prototyping. Can be run without arguments — the plugin extracts the design brief from your conversation.
 
@@ -105,7 +105,7 @@ Starts the interactive product/feature design workflow (9 adaptive phases) or re
 | `--from=PHASE`     | Start from or resume at a specific phase                     |
 | `--reset-attempts` | Reset failed attempt counters (resume)                       |
 
-Design output can feed directly into development: `/development .agyflow/tasks/product-design/...`
+Design output can feed directly into development: `/agyflow:development .agyflow/tasks/product-design/...`
 
 **Task directory**: `.agyflow/tasks/product-design/`
 **Resume phases**: `context`, `synthesis`, `problem`, `personas`, `alternatives`, `convergence`, `specification`, `prototyping`, `handoff`
@@ -114,9 +114,9 @@ Design output can feed directly into development: `/development .agyflow/tasks/p
 
 ## Reviews & Audits
 
-Standalone review commands that can be run anytime, independent of workflows.
+Standalone review skills that can be run anytime, independent of workflows.
 
-### `/reviews-code [path]`
+### `/agyflow:reviews-code [path]`
 
 Automated code quality, security, and performance analysis.
 
@@ -126,15 +126,15 @@ Automated code quality, security, and performance analysis.
 
 Analyzes complexity, duplication, code smells, security vulnerabilities, and performance issues. Generates report with severity levels (Critical/Warning/Info).
 
-### `/reviews-pragmatic [path]`
+### `/agyflow:reviews-pragmatic [path]`
 
 Detects over-engineering and ensures code matches project scale. Identifies excessive abstraction, enterprise patterns in simple code, infrastructure overkill. Recommends specific simplifications with before/after examples.
 
-### `/reviews-reality-check [task-path]`
+### `/agyflow:reviews-reality-check [task-path]`
 
 Validates that completed work actually solves the intended problem. Runs tests, checks end-to-end workflows, and evaluates error scenarios. Returns deployment decision: Ready / Issues Found / Not Ready.
 
-### `/reviews-spec-audit [spec-path]`
+### `/agyflow:reviews-spec-audit [spec-path]`
 
 Independent specification audit with senior auditor perspective.
 
@@ -144,7 +144,7 @@ Independent specification audit with senior auditor perspective.
 
 Identifies ambiguities, missing details, and gaps. Uses external tools (GitHub CLI, Azure CLI) for verification.
 
-### `/reviews-production-readiness [path]`
+### `/agyflow:reviews-production-readiness [path]`
 
 Pre-deployment verification across 7 dimensions: configuration, monitoring, error handling, performance, security, deployment, and GO/NO-GO recommendation.
 
@@ -156,7 +156,7 @@ Pre-deployment verification across 7 dimensions: configuration, monitoring, erro
 
 ## Standards
 
-### `/flow-init [--standards-from=PATH]`
+### `/agyflow:flow-init [--standards-from=PATH]`
 
 Initialize the agyflow framework. Scans your codebase with a project-analyzer subagent, presents findings for confirmation, then generates:
 
@@ -170,7 +170,7 @@ Initialize the agyflow framework. Scans your codebase with a project-analyzer su
 
 If `.agyflow/` already exists, offers to backup, update, or cancel.
 
-### `/standards-discover [--scope=SCOPE]`
+### `/agyflow:standards-discover [--scope=SCOPE]`
 
 Auto-discovers coding standards from multiple sources in parallel: config files, source code patterns, documentation, pull requests, and CI/CD pipelines.
 
@@ -184,7 +184,7 @@ Auto-discovers coding standards from multiple sources in parallel: config files,
 
 Presents findings in confidence tiers (high/medium/low) for review before applying.
 
-### `/standards-update [description] [--from=PATH]`
+### `/agyflow:standards-update [description] [--from=PATH]`
 
 Update or create standards from conversation context or explicit description. When run without arguments, scans your current conversation for standards patterns like "we should always...", "our convention is...", "prefer X over Y" and proposes them as new standards.
 
@@ -194,11 +194,11 @@ Update or create standards from conversation context or explicit description. Wh
 
 ---
 
-## Quick Commands
+## Quick Skills
 
-Lightweight commands for small tasks that don't need a full orchestrator workflow.
+Lightweight skills for small tasks that don't need a full orchestrator workflow.
 
-### `/quick-dev [task description]`
+### `/agyflow:quick-dev [task description]`
 
 Implement a task directly with standards awareness. Reads INDEX.md, loads applicable standards, then implements without planning mode.
 
@@ -207,7 +207,7 @@ Implement a task directly with standards awareness. Reads INDEX.md, loads applic
 **Task directory**: `.agyflow/tasks/quick-dev/YYYY-MM-DD-task-name/`
 **Artifacts**: `task.yml`, `summary.md`
 
-### `/quick-plan [task description]`
+### `/agyflow:quick-plan [task description]`
 
 Enter Google Antigravity CLI's planning mode with standards awareness. Discovers and reads applicable standards _before_ entering plan mode, so your plan is informed by project conventions.
 
@@ -216,11 +216,11 @@ Standards compliance checklist is required in the plan file before exiting plan 
 **Task directory**: `.agyflow/tasks/quick-plan/YYYY-MM-DD-task-name/`
 **Artifacts**: `task.yml` (+ `plan_path`), `analysis/findings.md`
 
-### `/quick-bugfix [bug description]`
+### `/agyflow:quick-bugfix [bug description]`
 
 Lightweight TDD-driven bug fix without a full orchestrator workflow. Analyzes the bug, writes a failing test, implements the fix, and verifies the test passes.
 
-**When to use**: Simple, isolated bugs where you can quickly identify the root cause. If the bug is too complex (multiple files, unclear root cause, architectural impact), the skill suggests escalating to `/development`.
+**When to use**: Simple, isolated bugs where you can quickly identify the root cause. If the bug is too complex (multiple files, unclear root cause, architectural impact), the skill suggests escalating to `/agyflow:development`.
 
 **Task directory**: `.agyflow/tasks/quick-bugfix/YYYY-MM-DD-task-name/`
 **Artifacts**: `task.yml`, `analysis/findings.md`, `summary.md`

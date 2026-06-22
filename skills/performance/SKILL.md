@@ -391,11 +391,11 @@ Refer to the template [src/templates/orchestrator-state-performance.yml](../../t
 
 ---
 
-## Command Integration
+## Skill Integration
 
 Invoked via:
 
-- `/performance [description]` (new)
-- `/performance [task-path] [--from=PHASE]` (resume)
+- `/agyflow:performance [description]` (new)
+- `/agyflow:performance [task-path] [--from=PHASE]` (resume)
 
 Task directory: `.agyflow/tasks/performance/YYYY-MM-DD-task-name/`

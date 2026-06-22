@@ -1,4 +1,4 @@
-command: quick-plan
+skill: quick-plan
 title: "Short title from task description"
 description: "Full task description as provided by user"
 status: in_progress

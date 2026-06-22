@@ -533,7 +533,7 @@ Skills for generating diagrams and rendering markdown content into shareable for
 
 ## Available Workflows & Skills
 
-Under the Antigravity CLI, workflows are structured as Skills instead of user-facing slash commands. When a user requests a task, the agent automatically matches it to the appropriate workflow, reads the skill's `SKILL.md` using `view_file`, and executes the corresponding orchestrator.
+Under the Antigravity CLI, workflows are structured as Skills. They can be invoked by the user using slash commands in the format `/<plugin_name>:<skill_name>` (e.g., `/agyflow:work` or `/agyflow:quick-dev`). When a user requests a task, the agent automatically matches it to the appropriate workflow, reads the skill's `SKILL.md` using `view_file`, and executes the corresponding orchestrator.
 
 All orchestrators support resuming from a specific phase via state restoration from `orchestrator-state.yml`.
 

@@ -40,7 +40,7 @@ The Task prompt MUST include:
 
 | Input                 | Source                  | Purpose                                                                                |
 | --------------------- | ----------------------- | -------------------------------------------------------------------------------------- |
-| `task_path`           | Orchestrator or command | Absolute path to task directory                                                        |
+| `task_path`           | Orchestrator or skill   | Absolute path to task directory                                                        |
 | `report_path`         | Orchestrator (optional) | Where to write report (default: `verification/reality-check.md` relative to task_path) |
 | `skip_test_execution` | Orchestrator (optional) | When `true`, read test results from file instead of running tests                      |
 | `test_results_path`   | Orchestrator (optional) | Path to test results file (when `skip_test_execution: true`)                           |
